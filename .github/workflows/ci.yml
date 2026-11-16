@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    name: ${{ matrix.pipeline }} (${{ matrix.mode }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        pipeline: [fastq-qc]
+        # stub checks the wiring quickly; full runs the tools in Docker on the test data
+        mode: [stub, full]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: nf-core/setup-nextflow@v2
+        with:
+          version: "latest-stable"   # pin once Cirro's supported Nextflow version is known
+
+      - name: Lint
+        if: matrix.mode == 'stub'
+        run: nextflow lint pipelines/${{ matrix.pipeline }}/main.nf modules subworkflows
+
+      - name: Run
+        run: >-
+          nextflow run . -main-script pipelines/${{ matrix.pipeline }}/main.nf
+          -profile test,docker
+          --input tests/${{ matrix.pipeline }}/samplesheet.csv
+          ${{ matrix.mode == 'stub' && '-stub-run' || '' }}
+
+  preprocess:
+    name: preprocess.py syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m py_compile pipelines/*/.cirro/preprocess.py

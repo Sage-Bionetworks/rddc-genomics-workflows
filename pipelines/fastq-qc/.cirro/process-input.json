@@ -1,0 +1,4 @@
+{
+  "multiqc_title": "$.dataset.params.multiqc_title",
+  "outdir": "$.dataset.dataPath"
+}

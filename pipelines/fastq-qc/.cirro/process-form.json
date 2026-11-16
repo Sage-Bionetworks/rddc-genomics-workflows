@@ -1,0 +1,15 @@
+{
+  "form": {
+    "title": "FASTQ QC",
+    "description": "FastQC on every FASTQ file in the input dataset, summarized in one MultiQC report.",
+    "type": "object",
+    "properties": {
+      "multiqc_title": {
+        "type": "string",
+        "title": "Report title",
+        "description": "Title shown at the top of the MultiQC report (optional)."
+      }
+    }
+  },
+  "ui": {}
+}
