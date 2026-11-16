@@ -73,6 +73,7 @@ workflow {
 
     routed.map { meta, _f -> intakeRow(meta, meta.route, meta.route_reason) }
         .mix(SIDECAR_INTAKE.out.rejected.map { meta, reason -> intakeRow(meta, 'rejected', reason) })
+        .mix(SIDECAR_INTAKE.out.sets.map { meta -> intakeRow(meta, 'file_set', '') })
         .collectFile(name: 'intake.tsv', storeDir: "${params.outdir}/intake", sort: true,
                      seed: "file_id\tname\tclass\tdocument_type\tencoding_format\tsubjects\troute\treason\n")
 
