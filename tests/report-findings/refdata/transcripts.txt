@@ -1,0 +1,3 @@
+# Transcripts in the report-findings test fixtures (reference subset)
+NM_007294.4
+NM_000492.4

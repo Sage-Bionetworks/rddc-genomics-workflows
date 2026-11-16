@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "rddc-reports"
+version = "0.1.0.dev0"
+description = "Genetic test reports to normalized findings, for the RDDC report-findings pipeline"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+dependencies = [
+    # hgvs depends on psycopg2 (source build). The image installs libpq-dev to build it; a
+    # local venv can install psycopg2-binary and then hgvs with --no-deps (see README).
+    "hgvs==1.5.7",
+    "ga4gh.vrs==2.3.3",
+    "biocommons.seqrepo==0.6.11",
+    "bioutils==0.6.2",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+rddc-reports = "rddc_reports.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rddc_reports"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
