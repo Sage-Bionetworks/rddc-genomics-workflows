@@ -1,0 +1,5 @@
+file_id	name	class	document_type	encoding_format	subjects	route	reason
+7f1c2a9e-0000-4000-8000-000000000011	reports/R001.txt	ClinicalDocumentFile	genetic_report	text/plain	P001	evidence	report_document_of_structured_results
+7f1c2a9e-0000-4000-8000-000000000012	reports/R002.txt	ClinicalDocumentFile	genetic_report	text/plain	P002;P003	extract	
+7f1c2a9e-0000-4000-8000-000000000013	notes/N001.txt	ClinicalDocumentFile		text/plain	P001	skipped	no_document_type
+7f1c2a9e-0000-4000-8000-000000000014	results/results.json	GeneticTestResultFile		application/json	P001	structured	

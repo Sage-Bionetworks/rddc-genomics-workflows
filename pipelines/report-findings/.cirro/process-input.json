@@ -1,0 +1,6 @@
+{
+  "refdata": "$.dataset.params.refdata",
+  "seqrepo": "$.dataset.params.seqrepo",
+  "include_untyped_documents": "$.dataset.params.include_untyped_documents",
+  "outdir": "$.dataset.dataPath"
+}

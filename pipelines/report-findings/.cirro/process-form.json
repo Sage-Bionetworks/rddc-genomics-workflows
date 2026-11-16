@@ -1,0 +1,35 @@
+{
+  "form": {
+    "title": "Report findings",
+    "description": "Genetic test reports in a deposited batch to structured findings, FHIR Genomics Reporting and VRS. In development: intake, routing and the reference-data check.",
+    "type": "object",
+    "properties": {
+      "refdata": {
+        "type": "string",
+        "format": "file-path",
+        "title": "Reference store",
+        "description": "Transcript alignments exported from UTA (uta_20241220.sqlite), from an RDDC variation reference dataset.",
+        "pattern": "uta_[0-9]{8}[a-z]?\\.sqlite$",
+        "process": "rddc-variation-reference"
+      },
+      "seqrepo": {
+        "type": "string",
+        "format": "directory-path",
+        "title": "SeqRepo snapshot",
+        "description": "Reference sequences: the seqrepo/<date> folder of the same reference dataset (2024-12-20).",
+        "pattern": "seqrepo/[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+        "process": "rddc-variation-reference"
+      },
+      "include_untyped_documents": {
+        "type": "boolean",
+        "title": "Extract untyped documents",
+        "description": "Also extract clinical documents whose sidecar entry has no documentType.",
+        "default": false
+      }
+    },
+    "required": ["refdata", "seqrepo"]
+  },
+  "ui": {
+    "ui:order": ["refdata", "seqrepo", "include_untyped_documents"]
+  }
+}

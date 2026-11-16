@@ -1,0 +1,7 @@
+GENETIC TEST REPORT (synthetic placeholder for pipeline wiring; replaced in M1)
+Patient: P001    Test: BRCA1/BRCA2 sequencing and deletion/duplication analysis
+Result: POSITIVE
+Gene   Variant                     Zygosity       Classification
+BRCA1  NM_007294.4:c.68_69del      heterozygous   Pathogenic
+       p.(Glu23ValfsTer17)
+Limitations: Variants outside the coding regions and splice sites were not assessed.

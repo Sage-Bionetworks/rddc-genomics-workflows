@@ -1,0 +1,247 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "arrayShape": "cr:arrayShape",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "containedIn": "cr:containedIn",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "description": {
+      "@container": "@language"
+    },
+    "equivalentProperty": "cr:equivalentProperty",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isArray": "cr:isArray",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "name": {
+      "@container": "@language"
+    },
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform",
+    "rddc": "https://w3id.org/rddc/vocab/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "additionalType": {
+      "@id": "sc:additionalType",
+      "@type": "@id"
+    },
+    "batchId": "rddc:batchId",
+    "bucket": "rddc:bucket",
+    "bundleType": "rddc:bundleType",
+    "cdmEtlReference": "rddc:cdmEtlReference",
+    "cdmHolder": "rddc:cdmHolder",
+    "cdmReleaseDate": "rddc:cdmReleaseDate",
+    "cdmSource": "rddc:cdmSource",
+    "cdmSourceAbbreviation": "rddc:cdmSourceAbbreviation",
+    "cdmSourceName": "rddc:cdmSourceName",
+    "cdmTable": "rddc:cdmTable",
+    "compression": "rddc:compression",
+    "confidence": "rddc:confidence",
+    "confirmed": "rddc:confirmed",
+    "consentRef": "rddc:consentRef",
+    "containsBiometricIdentifiers": "rddc:containsBiometricIdentifiers",
+    "containsDates": "rddc:containsDates",
+    "containsFreeText": "rddc:containsFreeText",
+    "containsZipCodes": "rddc:containsZipCodes",
+    "contributorId": "rddc:contributorId",
+    "diagnosisCodeSystems": "rddc:diagnosisCodeSystems",
+    "directIdentifiersRemoved": "rddc:directIdentifiersRemoved",
+    "documentType": "rddc:documentType",
+    "excludes": "cr:excludes",
+    "exportTime": "rddc:exportTime",
+    "fieldPath": "rddc:fieldPath",
+    "formDefinition": "rddc:formDefinition",
+    "formVersion": "rddc:formVersion",
+    "idSystem": "rddc:idSystem",
+    "identifierSystemUri": "rddc:identifierSystemUri",
+    "indexOf": "rddc:indexOf",
+    "interaction": "rddc:interaction",
+    "issuedAt": "rddc:issuedAt",
+    "issuedBy": "rddc:issuedBy",
+    "method": "rddc:method",
+    "modalities": "rddc:modalities",
+    "notes": "rddc:notes",
+    "noticeRef": "rddc:noticeRef",
+    "origin": "rddc:origin",
+    "pairedWith": "rddc:pairedWith",
+    "platform": "rddc:platform",
+    "prefixPattern": "rddc:prefixPattern",
+    "processingHints": "rddc:processingHints",
+    "recordCount": "rddc:recordCount",
+    "referenceGenome": "rddc:referenceGenome",
+    "region": "rddc:region",
+    "registerVersion": "rddc:registerVersion",
+    "reportDocuments": "rddc:reportDocuments",
+    "resourceType": "rddc:resourceType",
+    "sensitivity": "rddc:sensitivity",
+    "sequencingPlatform": "rddc:sequencingPlatform",
+    "software": "rddc:software",
+    "sourceId": "rddc:sourceId",
+    "sourceReleaseDate": "rddc:sourceReleaseDate",
+    "subjectCount": "rddc:subjectCount",
+    "subjectId": "rddc:subjectId",
+    "subjectIds": "rddc:subjectIds",
+    "subjects": "rddc:subjects",
+    "synthetic": "rddc:synthetic",
+    "valueOrigins": "rddc:valueOrigins",
+    "vocabularyVersion": "rddc:vocabularyVersion",
+    "wasAttributedTo": "prov:wasAttributedTo",
+    "wasDerivedFrom": "prov:wasDerivedFrom"
+  },
+  "@id": "urn:uuid:7f1c2a9e-0000-4000-8000-000000000002",
+  "@type": "sc:Dataset",
+  "conformsTo": [
+    "http://mlcommons.org/croissant/1.1",
+    "https://w3id.org/rddc/sidecar/0.1.0"
+  ],
+  "name": "src-test-01/2026-11-rf-test",
+  "url": "s3://rddc-deposit-test/src-test-01/2026-11-rf-test/",
+  "dateCreated": "2026-11-14T00:00:00Z",
+  "wasAttributedTo": {
+    "@type": "sc:SoftwareApplication",
+    "name": "make_sidecar.py",
+    "softwareVersion": "0.1.0"
+  },
+  "contributorId": "test-site",
+  "sourceId": "src-test-01",
+  "batchId": "2026-11-rf-test",
+  "interaction": "add",
+  "sensitivity": {
+    "directIdentifiersRemoved": true,
+    "synthetic": true,
+    "containsDates": false,
+    "containsZipCodes": false,
+    "containsFreeText": true,
+    "containsBiometricIdentifiers": false
+  },
+  "description": "Synthetic genetic test reports for the report-findings pipeline tests.",
+  "subjects": [
+    {
+      "subjectId": "P001",
+      "idSystem": "contributor"
+    },
+    {
+      "subjectId": "P002",
+      "idSystem": "contributor"
+    },
+    {
+      "subjectId": "P003",
+      "idSystem": "contributor"
+    }
+  ],
+  "distribution": [
+    {
+      "@id": "urn:uuid:7f1c2a9e-0000-4000-8000-000000000011",
+      "@type": "cr:FileObject",
+      "additionalType": "rddc:ClinicalDocumentFile",
+      "name": "reports/R001.txt",
+      "contentUrl": "reports/R001.txt",
+      "contentSize": "415 B",
+      "encodingFormat": "text/plain",
+      "sha256": "21c06de76cd7e2f359990549f4b44a9a97073be5791d3d970080bb038043dfdf",
+      "md5": "ba2c49a77cc295a5cd9215deca175a29",
+      "subjectIds": [
+        "P001"
+      ],
+      "documentType": "genetic_report"
+    },
+    {
+      "@id": "urn:uuid:7f1c2a9e-0000-4000-8000-000000000012",
+      "@type": "cr:FileObject",
+      "additionalType": "rddc:ClinicalDocumentFile",
+      "name": "reports/R002.txt",
+      "contentUrl": "reports/R002.txt",
+      "contentSize": "500 B",
+      "encodingFormat": "text/plain",
+      "sha256": "6e1f3f53478c0f3fc5c49a1f3a062bfe9043fa24c10cc66b843e76d9874aa920",
+      "md5": "00000000000000000000000000000000",
+      "subjectIds": [
+        "P002",
+        "P003"
+      ],
+      "documentType": "genetic_report"
+    },
+    {
+      "@id": "urn:uuid:7f1c2a9e-0000-4000-8000-000000000013",
+      "@type": "cr:FileObject",
+      "additionalType": "rddc:ClinicalDocumentFile",
+      "name": "notes/N001.txt",
+      "contentUrl": "../make_sidecar.py",
+      "contentSize": "98 B",
+      "encodingFormat": "text/plain",
+      "sha256": "a3f9d303fbb8764fee191fa2fb7c9815ab7ddc16a128ee0031d03969b2a6ccbd",
+      "md5": "17fbc13a4921063fe846dfb06e13f8e1",
+      "subjectIds": [
+        "P001"
+      ]
+    },
+    {
+      "@id": "urn:uuid:7f1c2a9e-0000-4000-8000-000000000014",
+      "@type": "cr:FileObject",
+      "additionalType": "rddc:GeneticTestResultFile",
+      "name": "results/results.json",
+      "contentUrl": "results/results.json",
+      "contentSize": "233 B",
+      "encodingFormat": "application/json",
+      "sha256": "2c8d22b16fa2e204fa405917b1e15ea504f2dde573e36605b68b068150ac5ee9",
+      "md5": "ca4350c805f3c0d5bfb97f3ed16d7dae",
+      "subjectIds": [
+        "P001"
+      ],
+      "referenceGenome": "GRCh38",
+      "reportDocuments": [
+        {
+          "@id": "urn:uuid:7f1c2a9e-0000-4000-8000-000000000011"
+        }
+      ],
+      "sensitivity": {
+        "containsFreeText": true
+      }
+    },
+    {
+      "@id": "reports-set",
+      "@type": "cr:FileSet",
+      "additionalType": "rddc:ClinicalDocumentFile",
+      "name": "more reports",
+      "encodingFormat": "application/pdf",
+      "includes": [
+        "more/*.pdf"
+      ]
+    }
+  ]
+}

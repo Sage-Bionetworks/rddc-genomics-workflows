@@ -1,0 +1,8 @@
+GENETIC TEST REPORT (synthetic placeholder for pipeline wiring; replaced in M1)
+Trio analysis. Proband: P002. Mother: P003.
+Test: CFTR full gene sequencing
+Proband result: POSITIVE
+Gene  Variant                        Zygosity     Classification   Inheritance
+CFTR  NM_000492.4:c.1521_1523del     homozygous   Pathogenic       maternal + paternal
+Mother (P003): heterozygous for NM_000492.4:c.1521_1523del (carrier).
+Example of nomenclature used in this report: NM_000492.4:c.1624G>T (not detected).
