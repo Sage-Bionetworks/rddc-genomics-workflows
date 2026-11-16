@@ -12,9 +12,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pipeline: [fastq-qc]
+        pipeline: [fastq-qc, report-findings]
         # stub checks the wiring quickly; full runs the tools in Docker on the test data
         mode: [stub, full]
+        include:
+          - pipeline: fastq-qc
+            target: fastq
+          - pipeline: report-findings
+            target: rf
     steps:
       - uses: actions/checkout@v4
 
@@ -23,20 +28,25 @@ jobs:
           distribution: temurin
           java-version: "21"
 
-      - uses: nf-core/setup-nextflow@v2
-        with:
-          version: "latest-stable"   # pin once Cirro's supported Nextflow version is known
+      # Nextflow at the version pinned in the Makefile (NXF_VERSION); pin to Cirro's supported
+      # version once it is known.
+      - name: Nextflow
+        run: make tools
 
       - name: Lint
         if: matrix.mode == 'stub'
-        run: nextflow lint pipelines/${{ matrix.pipeline }}/main.nf modules subworkflows
+        run: .tools/nextflow lint pipelines/${{ matrix.pipeline }}/main.nf modules subworkflows
 
       - name: Run
-        run: >-
-          nextflow run . -main-script pipelines/${{ matrix.pipeline }}/main.nf
-          -profile test,docker
-          --input tests/${{ matrix.pipeline }}/samplesheet.csv
-          ${{ matrix.mode == 'stub' && '-stub-run' || '' }}
+        run: make ${{ matrix.target }}-${{ matrix.mode == 'stub' && 'stub' || 'test' }}
+
+  rddc-reports:
+    name: rddc-reports (unit tests, no network)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make check-image-tags
+      - run: make py-test
 
   preprocess:
     name: preprocess.py syntax

@@ -12,6 +12,7 @@ which version of each pipeline is registered, in which project, and how it links
 | Pipeline | Input | Description |
 | --- | --- | --- |
 | [`fastq-qc`](pipelines/fastq-qc/) | FASTQ (paired or single) | FastQC per file, MultiQC summary. Example pipeline for the layout |
+| [`report-findings`](pipelines/report-findings/) | batch sidecar (`_sidecar.json`): genetic test reports and results | Findings → FHIR Genomics Reporting + VRS. In development: intake only ([plan](pipelines/report-findings/PLAN.md)) |
 
 ## Layout
 
@@ -19,7 +20,8 @@ which version of each pipeline is registered, in which project, and how it links
 nextflow.config            shared config: manifest, profiles, resource labels (loaded for every pipeline)
 conf/                      config files included by nextflow.config
 modules/local/<tool>/      one process per tool, shared by pipelines
-subworkflows/local/        shared groups of processes (none yet)
+subworkflows/local/        shared groups of processes (sidecar_intake: files of a batch from its sidecar)
+containers/<image>/        images built from this repo (Dockerfile, code); modules pin them by tag
 pipelines/<name>/
   main.nf                  entry point registered in Cirro, with this pipeline's parameter defaults
   README.md                inputs, outputs, parameters
@@ -40,6 +42,9 @@ Rules that keep pipelines independent inside one repo:
 - **Shared code lives in `modules/` and `subworkflows/`.** A pipeline must not include files
   from another pipeline's directory.
 - **Containers are pinned** by version tag in each module. No `latest`.
+- **Pipeline code runs from containers.** Under `-main-script pipelines/<name>/main.nf` the
+  repo's `bin/` is not on the task PATH, and module binaries need a shared work directory or
+  Wave. Scripts are packaged in an image under `containers/` instead.
 - **Cirro supplies the executor, work directory and AWS settings.** Don't set them here. The
   profiles in `nextflow.config` are for local and CI runs only.
 
@@ -61,7 +66,8 @@ orchestrator) must adapt to; MINOR for new optional parameters or outputs; PATCH
 
 ## Running locally
 
-Requires Nextflow (>= 25.04) and Docker.
+Requires Docker and Java 17+; `make tools` fetches Nextflow (version pinned in the Makefile).
+`make help` lists the targets (`make rf-test`, `make py-test`, `make fastq-stub`, …).
 
 ```
 # stub run: checks the wiring without running tools (what CI runs)
