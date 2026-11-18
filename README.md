@@ -86,3 +86,7 @@ branch.
 3. Add test data under `tests/<name>/`, including the input file CI passes as `--input`.
 4. Add the pipeline to the table above and to the CI matrix in `.github/workflows/ci.yml`.
 5. Register it with a new `processes/<process>.yaml` in rddc-cirro-config.
+
+## Funding
+
+This research was, in part, funded by the Advanced Research Projects Agency for Health (ARPA-H). The views and conclusions contained in this document are those of the authors and should not be interpreted as representing the official policies, either expressed or implied, of the United States Government.
