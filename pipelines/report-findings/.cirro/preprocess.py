@@ -2,29 +2,38 @@
 
 The input dataset is a deposited batch: its files plus `_sidecar.json` at the batch root. The
 pipeline finds every other file from the sidecar, so the only parameter set here is
-`sidecar`, the full S3 path of that file. A dataset without exactly one root-level
-`_sidecar.json` is refused before any compute starts.
+`sidecar`, the full S3 path of that file. A run without exactly one input dataset that has a
+root-level `_sidecar.json` is refused before any compute starts.
+
+The sidecar is looked for in the listing of the input datasets (`ds.input_files()`), not in
+`ds.files`: that table holds only files matched to samples, and a batch has no samples.
+Datasets chosen in the run form (the reference data) are inputs too; they have no sidecar.
 """
 
 from cirro.helpers.preprocess_dataset import PreprocessDataset
 
 
-def find_sidecar(paths):
-    """The `_sidecar.json` with the shortest path (the batch root), if exactly one is there."""
-    sidecars = sorted((p for p in paths if p.rsplit("/", 1)[-1] == "_sidecar.json"), key=len)
-    if not sidecars:
-        raise ValueError("the input dataset has no _sidecar.json")
-    root_depth = sidecars[0].count("/")
-    at_root = [p for p in sidecars if p.count("/") == root_depth]
-    if len(at_root) > 1:
-        raise ValueError(f"more than one _sidecar.json at the batch root: {at_root}")
-    return at_root[0]
+def object_key(path):
+    """An S3 path or key without scheme and bucket, so listings in either form compare."""
+    return path.split("://", 1)[1].split("/", 1)[1] if "://" in path else path.lstrip("/")
+
+
+def find_sidecar(data_paths, files):
+    """The `<dataPath>/_sidecar.json` that exists, if exactly one input dataset has one."""
+    keys = {object_key(f) for f in files}
+    candidates = [p.rstrip("/") + "/_sidecar.json" for p in data_paths]
+    found = [c for c in candidates if object_key(c) in keys]
+    if not found:
+        raise ValueError("no input dataset has a _sidecar.json at its root")
+    if len(found) > 1:
+        raise ValueError(f"more than one input dataset has a _sidecar.json: {found}")
+    return found[0]
 
 
 def main():
     ds = PreprocessDataset.from_running()
-    sidecar = find_sidecar(list(ds.files["file"]))
-    ds.add_param("sidecar", sidecar)
+    data_paths = [d["dataPath"] for d in ds.metadata["inputs"]]
+    ds.add_param("sidecar", find_sidecar(data_paths, list(ds.input_files()["file"])))
     if not ds.params.get("include_untyped_documents"):
         ds.add_param("include_untyped_documents", False, overwrite=True)
 
